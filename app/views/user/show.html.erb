@@ -1,2 +1,15 @@
-<h1>User</h1>
+<h1>Your Events</h1>
 <p>Username: <%= @user.name %></p>
+<h2>Events:</h2>
+<% if @events.any? %>
+<div>
+<% @events.each do |event| %>
+	<p>Event: <%= event.name %></p>
+	<p>When: <%= event.date %></p>
+	<p>Description:</p>
+	<p><%= event.description %></p>
+<% end %>
+</div>
+<% else %>
+	<p>You have no events.  Create an <%= link_to 'Event', '#' %></p>
+<% end %>

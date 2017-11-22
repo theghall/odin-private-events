@@ -7,6 +7,8 @@ class UserController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      @events = @user.events
+
       render 'show'
     else
       render 'new'
@@ -16,6 +18,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @events = @user.events
   end
 
   private
