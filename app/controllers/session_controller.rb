@@ -10,6 +10,7 @@ class SessionController < ApplicationController
       cookies.permanent[:user] = user.id
 
       @user = User.find(user.id)
+      @events = @user.events
 
       render 'user/show'
     else

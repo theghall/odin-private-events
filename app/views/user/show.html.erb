@@ -4,12 +4,13 @@
 <% if @events.any? %>
 <div>
 <% @events.each do |event| %>
-	<p>Event: <%= event.name %></p>
-	<p>When: <%= event.date %></p>
-	<p>Description:</p>
-	<p><%= event.description %></p>
+<p>Event: <%= event.name %></p>
+<p>When: <%= event.date %></p>
+<p>Description:</p>
+<p><%= event.description %></p>
 <% end %>
 </div>
 <% else %>
-	<p>You have no events.  Create an <%= link_to 'Event', '#' %></p>
+<p>You have no events.</p>
 <% end %>
+<p>Create an <%= link_to 'Event', new_event_path  %></p>
