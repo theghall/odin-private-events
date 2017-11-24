@@ -1,13 +1,25 @@
 <h1>All Events</h1>
 <% if @events.any? %>
-<div>
-<% @events.each do |event| %>
-<p>Name: <%= event.name %></p>
-<p>Date: <%= event.date %></p>
-<p>Description: <%= event.description %></p>
-<p>Created by: <%= event.creator.name %></p>
-<% end %>
-</div>
+  <div>
+  <% @events.each do |event| %>
+    <p>Name: <%= event.name %></p>
+    <p>Date: <%= event.date %></p>
+    <p>Description: <%= event.description %></p>
+    <p>Created by: <%= event.creator.name %></p>
+    <% if event.attendees.any? %>
+      <div>
+      <p>Guests:</p>
+      <% event.attendees.each do |guest| %>
+        <p><%= guest.name %></p>
+      <% end %>
+    <% else %>
+      <p>There are no guests.</p>
+    <% end %>
+    </div>
+    <p>Add <%= link_to 'guest', new_event_attendee_path(id: event.id) %></p>
+    <p>**************************</p>
+  <% end %>
+  </div>
 <% else %>
 <p>There are no events</p>
 <% end %>

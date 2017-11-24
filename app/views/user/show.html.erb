@@ -1,16 +1,26 @@
 <h1>Your Events</h1>
 <p>Username: <%= @user.name %></p>
-<h2>Events:</h2>
+<h2>Events you are hosting</h2>
 <% if @events.any? %>
-<div>
-<% @events.each do |event| %>
-<p>Event: <%= event.name %></p>
-<p>When: <%= event.date %></p>
-<p>Description:</p>
-<p><%= event.description %></p>
-<% end %>
-</div>
+  <div>
+  <% @events.each do |event| %>
+    <p>Event: <%= event.name %></p>
+    <p>When: <%= event.date %></p>
+    <p>Description:</p>
+    <p><%= event.description %></p>
+    <p>Add <%= link_to 'guest', new_event_attendee_path(id: event.id) %></p>
+    <p>******************************</p>
+  <% end %>
+  </div>
 <% else %>
-<p>You have no events.</p>
+  <p>You have no events.</p>
 <% end %>
 <p>Create an <%= link_to 'Event', new_event_path  %></p>
+<h2>Events you are attending</h2>
+<% if current_user.attended_events.any? %>
+  <% current_user.attended_events.each do |event| %>
+    <p><%= "#{event.date}: #{event.name}" %></p>
+  <% end %>
+<% else %>
+<p>You have nothing to attend.</p>
+<% end %>

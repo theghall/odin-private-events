@@ -1,0 +1,9 @@
+<h1>Add Guest</h1>
+<%= form_for(:event_attendee, url: event_attendees_path) do |f| %>
+<%= f.hidden_field :event_id, value: @event.id %>
+<p>
+<%= f.label 'Guest' %>
+<%= f.text_field :attendee %>
+</p>
+<%= f.submit 'Submit' %>
+<% end %>
