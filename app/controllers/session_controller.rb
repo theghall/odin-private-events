@@ -15,7 +15,7 @@ class SessionController < ApplicationController
 
       @events = @user.events
 
-      render 'user/show'
+      render 'users/show'
     else
       render 'new'
     end
