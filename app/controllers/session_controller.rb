@@ -1,4 +1,6 @@
 class SessionController < ApplicationController
+  include ApplicationHelper
+
   def new
   end
 
@@ -7,7 +9,7 @@ class SessionController < ApplicationController
     user = User.find_by(name: session_params[:name])
 
     if user
-      cookies.permanent[:user] = user.id
+      remember(user)
 
       @user = User.find(user.id)
 
