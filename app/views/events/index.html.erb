@@ -1,26 +1,35 @@
 <h1>All Events</h1>
-<% if @events.any? %>
+<h2>Upcoming</h2>
+<% if @events.upcoming.any? %>
   <div>
-  <% @events.each do |event| %>
-    <p>Name: <%= event.name %></p>
-    <p>Date: <%= event.date %></p>
-    <p>Description: <%= event.description %></p>
-    <p>Created by: <%= event.creator.name %></p>
+  <% @events.upcoming.each do |event| %>
+    <%= render 'event_info', event: event %>
     <% if event.attendees.any? %>
-      <div>
-      <p>Guests:</p>
-      <% event.attendees.each do |guest| %>
-        <p><%= guest.name %></p>
-      <% end %>
+      <%= render 'guests', event: event %>
     <% else %>
       <p>There are no guests.</p>
     <% end %>
-    </div>
     <p>Add <%= link_to 'guest', new_event_attendee_path(id: event.id) %></p>
     <p>**************************</p>
   <% end %>
   </div>
 <% else %>
-<p>There are no events</p>
+<p>There are no upcoming events</p>
+<% end %>
+<h2>Past</h2>
+<% if @events.past.any? %>
+  <div>
+  <% @events.past.each do |event| %>
+    <%= render 'event_info', event: event %>
+    <% if event.attendees.any? %>
+      <%= render 'guests', event: event %>
+    <% else %>
+      <p>There were no guests.</p>
+    <% end %>
+    <p>**************************</p>
+  <% end %>
+  </div>
+<% else %>
+<p>There are no past events</p>
 <% end %>
 <p>Create an <%= link_to 'event', new_event_path %></p>

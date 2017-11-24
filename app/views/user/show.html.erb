@@ -4,10 +4,8 @@
 <% if @events.any? %>
   <div>
   <% @events.each do |event| %>
-    <p>Event: <%= event.name %></p>
-    <p>When: <%= event.date %></p>
-    <p>Description:</p>
-    <p><%= event.description %></p>
+    <%= render 'events/event_info', event: event %>
+    <%= render 'events/guests', event: event %>
     <p>Add <%= link_to 'guest', new_event_attendee_path(id: event.id) %></p>
     <p>******************************</p>
   <% end %>
@@ -16,11 +14,19 @@
   <p>You have no events.</p>
 <% end %>
 <p>Create an <%= link_to 'Event', new_event_path  %></p>
-<h2>Events you are attending</h2>
-<% if current_user.attended_events.any? %>
-  <% current_user.attended_events.each do |event| %>
+<p>Upcoming Events:</p>
+<% if current_user.upcoming_events.any? %>
+  <% current_user.upcoming_events.each do |event| %>
     <p><%= "#{event.date}: #{event.name}" %></p>
   <% end %>
 <% else %>
-<p>You have nothing to attend.</p>
+  <p>You have nothing to attend.</p>
+<% end %>
+<p>Previous Events:</p>
+<% if current_user.previous_events.any? %>
+  <% current_user.previous_events.each do |event| %>
+    <p><%= "#{event.date}: #{event.name}" %></p>
+  <% end %>
+<% else %>
+  <p>You have attended no events.</p>
 <% end %>
